@@ -1,0 +1,10 @@
+---
+- name: Checkmk Agenten installieren
+  hosts: all
+  become: true
+
+  vars:
+    checkmk_agent_version: "2.4.0p13"
+    checkmk_agent_edition: "cre"
+  roles:
+    - role: checkmk.general.agent
