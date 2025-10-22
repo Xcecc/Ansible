@@ -1,6 +1,6 @@
 ---
 - name: Installiere Checkmk-Agent auf Linux-Hosts
-  hosts: your_linux_hosts
+  hosts: all
   become: yes
   
   tasks:
