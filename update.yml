@@ -1,0 +1,13 @@
+---
+name: Systeme aktualisieren
+hosts: all
+become: yes
+tasks:
+name: Paketlisten aktualisieren
+  ansible.builtin.apt:
+    update_cache: yes
+name: Alle Pakete aktualisieren
+ansible.builtin.apt:
+  upgrade: dist
+  autoremove: yes
+  autoclean: yes
