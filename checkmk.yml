@@ -1,9 +1,20 @@
 ---
-- name: Installiere Checkmk-Agent auf Linux-Hosts
+- name: Installiere Checkmk Agent
   hosts: all
   become: yes
-  
   tasks:
-    - name: Installiere checkmk.general.agent Rolle
-      ansible.builtin.include_role:
-        name: checkmk.general.agent
+
+    - name: Lade den Checkmk Agent herunter
+      get_url:
+        url: "http://10.10.10.7/monitoring/check_mk/agents/check-mk-agent_2.4.0p12-1_all.deb"
+        dest: "/tmp/check-mk-agent.deb"
+
+    - name: Installiere das heruntergeladene .deb-Paket
+      apt:
+        deb: "/tmp/check-mk-agent.deb"
+        state: present
+
+    - name: Entferne das heruntergeladene .deb-Paket
+      file:
+        path: "/tmp/check-mk-agent.deb"
+        state: absent
